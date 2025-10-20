@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body{ background: transparent; overflow:auto; }
+    form{ display:grid; gap:10px; padding: 12px; max-width: 720px; margin: 0 auto; }
+    label{ display:grid; gap:6px; font-size: 20px; }
+    input, textarea, button{
+      font: inherit; color: var(--green); background: transparent;
+      border: 2px solid var(--green); border-radius: 10px; padding: 8px;
+    }
+    textarea{ min-height: 160px; resize: vertical; }
+    button{ cursor: pointer; }
+    button:hover{ background: rgba(118,255,107,0.1); }
+    .ok{ margin: 10px auto; width: fit-content; border: 2px solid var(--green);
+         padding: 6px 10px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+  {% if request.args.get('ok') %}<div class="ok">Message received — thanks!</div>{% endif %}
+  <form action="/contact/submit" method="post">
+    <label> Name <input name="name" placeholder="Your name" required></label>
+    <label> Email <input type="email" name="email" placeholder="you@example.com" required></label>
+    <label> Message <textarea name="message" placeholder="How can I help?" required></textarea></label>
+    <button type="submit">Send</button>
+  </form>
+</body>
+</html>
